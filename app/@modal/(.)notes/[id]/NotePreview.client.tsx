@@ -16,6 +16,8 @@ function NotePreviewClient() {
 
   const {
     data: note,
+    isLoading,
+    error
   } = useQuery({
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),
@@ -24,6 +26,8 @@ function NotePreviewClient() {
   return (
     <Modal onClose={handleClose}>
       <div className={css.container}>
+        {isLoading && <p>Loading, please wait...</p>}
+        {error && <p>Something went wrong.</p>}
         {note && (
           <div className={css.item}>
             <div className={css.header}>
