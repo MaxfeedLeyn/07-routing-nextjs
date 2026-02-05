@@ -4,12 +4,12 @@ import {
   HydrationBoundary,
   dehydrate,
 } from "@tanstack/react-query";
-import NotePrewiewClient from './NotePreiew.client';
-type NotePrewiewProps = {
+import NotePreviewClient from './NotePreview.client';
+type NotePreviewProps = {
     params: Promise<{ id: string }>;
 }
 
-async function NotePrewiew({ params }: NotePrewiewProps) {
+async function NotePreview({ params }: NotePreviewProps) {
   const { id } = await params;
   const queryClient = new QueryClient();
 
@@ -20,9 +20,9 @@ async function NotePrewiew({ params }: NotePrewiewProps) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NotePrewiewClient />
+      <NotePreviewClient />
     </HydrationBoundary>
   );
 }
 
-export default NotePrewiew;
+export default NotePreview;
