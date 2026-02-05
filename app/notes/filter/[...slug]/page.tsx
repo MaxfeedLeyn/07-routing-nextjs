@@ -21,7 +21,7 @@ async function Notes({params}: NotesProps) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NotesClient initialQuery={""}/>
+      <NotesClient/>
     </HydrationBoundary>
   );
 }

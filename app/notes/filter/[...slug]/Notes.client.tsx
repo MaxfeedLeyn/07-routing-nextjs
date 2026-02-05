@@ -12,11 +12,11 @@ import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { useParams } from "next/navigation";
 
-function NotesClient({ initialQuery = "" }: { initialQuery?: string }) {
+function NotesClient() {
   const params = useParams();
   const { slug } = params;
 
-  const [query, setQuery] = useState(initialQuery);
+  const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
