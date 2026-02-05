@@ -1,13 +1,12 @@
 "use client";
 import Modal from "@/components/Modal/Modal";
 import css from "./NotePreview.module.css";
-import { useState } from "react";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { fetchNoteById } from "@/lib/api";
 
-function NotePrewiewClient() {
+function NotePreviewClient() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
 
@@ -18,7 +17,7 @@ function NotePrewiewClient() {
   const {
     data: note,
   } = useQuery({
-    queryKey: ["notes", id],
+    queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),
     refetchOnMount: false,
   });
@@ -30,8 +29,9 @@ function NotePrewiewClient() {
             <div className={css.header}>
               <h2>{note.title}</h2>
             </div>
-            <div className={css.content}>{note.content}</div>
-            <div className={css.date}>{note.createdAt}</div>
+            <p className={css.content}>{note.content}</p>
+            <p className={css.date}>{note.createdAt}</p>
+            <p className={css.tag}>{note.tag}</p>
           </div>
         )}
         <button className={css.backBtn} onClick={handleClose}>Close</button>
@@ -40,4 +40,4 @@ function NotePrewiewClient() {
   );
 }
 
-export default NotePrewiewClient;
+export default NotePreviewClient;

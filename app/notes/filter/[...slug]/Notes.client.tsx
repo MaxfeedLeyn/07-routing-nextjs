@@ -10,22 +10,22 @@ import NoteForm from "@/components/NoteForm/NoteForm";
 import css from "./NotesPage.module.css";
 import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { useParams } from "next/navigation";
 
-function NotesClient() {
-  const params = useParams();
-  const { slug } = params;
+interface NotesClientProps{
+  tag: string | undefined;
+}
+
+function NotesClient({tag}:NotesClientProps) {
 
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  let tag = undefined;
-  if (slug) tag = slug[0] === "all" ? undefined : slug[0];
+  const tagType = tag === "all" ? undefined : tag;
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["notes", query, page, tag],
-    queryFn: () => fetchNotes(query, page, tag),
+    queryKey: ["notes", query, page, tagType],
+    queryFn: () => fetchNotes(query, page, tagType),
     placeholderData: keepPreviousData,
   });
 
