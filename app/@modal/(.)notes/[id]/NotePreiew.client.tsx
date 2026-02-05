@@ -17,8 +17,6 @@ function NotePrewiewClient() {
 
   const {
     data: note,
-    isLoading,
-    error,
   } = useQuery({
     queryKey: ["notes", id],
     queryFn: () => fetchNoteById(id),
@@ -27,8 +25,6 @@ function NotePrewiewClient() {
   return (
     <Modal onClose={handleClose}>
       <div className={css.container}>
-        {isLoading && <p>Loading, please wait...</p>}
-        {(error || !note) && <p>Something went wrong.</p>}
         {note && (
           <div className={css.item}>
             <div className={css.header}>
@@ -38,6 +34,7 @@ function NotePrewiewClient() {
             <div className={css.date}>{note.createdAt}</div>
           </div>
         )}
+        <button className={css.backBtn} onClick={handleClose}>Close</button>
       </div>
     </Modal>
   );
